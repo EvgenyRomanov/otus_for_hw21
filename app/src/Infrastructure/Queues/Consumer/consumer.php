@@ -9,7 +9,7 @@ try {
     $containerBuilder = new ContainerBuilder();
     $containerBuilder->addDefinitions(__DIR__ . '/../../../../config/container.php');
     $container = $containerBuilder->build();
-    $consumer= $container->get(RabbitMQConsumer::class);
+    $consumer = $container->get(RabbitMQConsumer::class);
 
     $consumer->run();
 } catch (Exception $e) {

@@ -1,7 +1,22 @@
 <?php
 
-return
-[
+require_once __DIR__ . '/vendor/autoload.php';
+
+use DI\ContainerBuilder;
+
+$containerBuilder = new ContainerBuilder();
+$containerBuilder->addDefinitions(__DIR__ . '/config/container.php');
+$container = $containerBuilder->build();
+
+$settings = $container->get('settings')['db'];
+
+$driver = $settings['driver'];
+$host = $settings['host'];
+$dbname = $settings['database'];
+$username = $settings['username'];
+$password = $settings['password'];
+
+return [
     'paths' => [
         'migrations' => '%%PHINX_CONFIG_DIR%%/db/migrations',
         'seeds' => '%%PHINX_CONFIG_DIR%%/db/seeds'
@@ -10,11 +25,11 @@ return
         'default_migration_table' => 'phinxlog',
         'default_environment' => 'development',
         'production' => [
-            'adapter' => 'mysql',
+            'adapter' => $driver,
             'host' => 'mysql',
-            'name' => $_ENV['MYSQL_DATABASE'],
-            'user' => $_ENV['MYSQL_USER'],
-            'pass' => $_ENV['MYSQL_PASSWORD'],
+            'name' => $dbname,
+            'user' => $username,
+            'pass' => $password,
             'port' => '3306',
             'charset' => 'utf8',
         ],
