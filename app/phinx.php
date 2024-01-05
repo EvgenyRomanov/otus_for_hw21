@@ -25,7 +25,7 @@ return [
         'default_migration_table' => 'phinxlog',
         'default_environment' => 'development',
         'production' => [
-            'adapter' => $driver,
+            'adapter' => 'mysql',
             'host' => 'mysql',
             'name' => $dbname,
             'user' => $username,
