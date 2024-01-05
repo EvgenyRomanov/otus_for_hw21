@@ -1,16 +1,5 @@
 <?php
 
-require_once __DIR__ . '/vendor/autoload.php';
-
-$dotenv = DotenvVault\DotenvVault::createImmutable(__DIR__ . '/../');
-$dotenv->safeLoad();
-
-$dbname = getenv('MYSQL_DATABASE');
-$username = getenv('MYSQL_USER');
-$password = getenv('MYSQL_PASSWORD');
-
-var_dump($username);
-
 return [
     'paths' => [
         'migrations' => '%%PHINX_CONFIG_DIR%%/db/migrations',
@@ -22,9 +11,9 @@ return [
         'production' => [
             'adapter' => 'mysql',
             'host' => 'mysql',
-            'name' => $dbname,
-            'user' => $username,
-            'pass' => $password,
+            'name' => $_ENV['MYSQL_DATABASE'],
+            'user' => $_ENV['MYSQL_USER'],
+            'pass' => $_ENV['MYSQL_PASSWORD'],
             'port' => '3306',
             'charset' => 'utf8',
         ],
